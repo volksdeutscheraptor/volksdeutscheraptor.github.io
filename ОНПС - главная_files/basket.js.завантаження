@@ -1,0 +1,218 @@
+$(document).ready(function() { 
+   "use strict";
+ 	var link = "http://xn--56-6kctpkcnr4an5d.xn--p1ai/";
+	var tovar_id;
+	$('[data-toggle="tooltip"]').tooltip();
+	//$(".cart_small").sticky({ topSpacing: 20 });
+	$('#email_check').blur(function(){
+			var query_string = $(this).val();
+			if(query_string.length>3)
+			{
+				$.ajax({
+					type: "POST",
+					url: link + "main/email_valid",
+					data: { user_email:query_string },
+					success: function(data)
+					{
+						if(data==='exist')
+						{
+							$('#result_email').html('Такой email уже зарегистрирован');
+							$('.login-success').attr('disabled', 'disabled');
+						}
+						else
+						{
+							$('#result_email').html(query_string+' не занят');
+							$('.login-success').removeAttr('disabled');
+						}				
+					}
+				});
+			}
+		});
+	/*$('.more').live('click',function(){
+		if($(this).hasClass('opened'))
+		{
+			$(this).parent().find('.more_info').toggle("slow");
+			$(this).parent().parent().find('.fruit_desc').css('height','95px');
+			$(this).removeClass('opened');
+			return false;
+		}else{
+			$(this).parent().find('.more_info').toggle("slow");
+			$(this).parent().parent().find('.fruit_desc').css('height','auto');
+			$(this).addClass('opened');
+			return false;
+		}
+	});*/
+	
+	$('.basket_href').live('click',function(){
+		//alert('click');
+		$('body').find('.cart_popup').toggle();
+		//event.preventDefault();
+		return false;
+	});
+	/*$('.basket').live('mouseout',function(){
+		$('.cart_popup').toggleClass('hide');
+		event.preventDefault();
+	});*/
+	
+	$("input[name='basket_qty']").live('change',function(){
+		//var id = $(this).closest('form.smaller').find('input[name=product_id]').val();
+		var rowid = $(this).parent().parent().find('input[name=row_id]').val();
+		var qua = $(this).val();
+		//alert(rowid);
+		$.post(link + "main/update_cart_item", { row_id:rowid, quantity: qua, ajax: '1' },
+		function(data){
+				if(data === 'true'){
+					$.get(link + "main/show_cart", function(cart){
+						$(".busket_holder").html(cart);
+						$('#myBusket').modal('toggle');
+					});
+				}
+			 }); 
+		return false;
+	});
+
+	$(".btn-busket").click(function() {
+		var id = $(this).attr("id");
+		//var qty = $(this).closest('tr').find('input[name=quantity]').val();
+		//alert(id);
+		var product = $(this).parent().parent().find('.blog_title').html();
+		var price = $(this).parent().parent().find('.price').html();
+		$.post(link + "main/add_cart_item", { product_id: id, quantity: '1',product:product,price:price, ajax: '1' },
+  			function(data){
+				if(data === 'true'){
+					$.get(link + "main/show_cart", function(cart){
+						$(".busket_holder").html(cart);
+						popup("Товар добавлен в корзину"); 
+						yaCounter43240019.reachGoal('inbusket');
+					});
+				}else{
+					popup("Такого товара нет в нашей базе");
+				}	
+			 }); 
+		return false;
+	});
+	
+	$(".btn-notice").click(function() {
+		tovar_id = $(this).attr("id");
+		$("#notice").modal('show');
+		console.log(tovar_id);
+		return false;
+	});
+	
+	$("#notice_form").submit(function(){
+		$('#form_product_id_value').val(tovar_id);
+		/*var name = $('body').find('.notice_form').find('#user_name').val();
+		var mail = $('body').find('.notice_form').find('#user_email').val();
+		$.post(link + "main/order_notice", { name:name,mail:mail, ajax: '1' },
+		function(data){
+				if(data === 'true'){
+					
+					//$('#myModal').modal('hide');
+					popup("Ваш заявка отправлена! После поступления товара на склад вы получите уведомление на почту!"); 
+					//yaCounter44866774.reachGoal('call');
+				}else{
+					popup("Произошла ошибка при отправке заказа!"); 
+				}
+			 }); */
+		$.post($('#notice_form').attr('action'), $('#notice_form').serialize(), function( data ) {
+		if(data.st === 0)
+			{
+			 	popup(data.msg);
+			}
+			if(data.st === 1)
+			{
+			 	popup(data.msg);
+				yaCounter43240019.reachGoal('notice');
+				//ga('send', 'event', 'Knopka', 'register');
+			}				
+		}, 'json');
+		return false;
+	});
+	
+	$(".liked").click(function() {
+		var id = $(this).attr("id");
+		//var id = $(this).parent().parent().find('.page_name').attr('id');
+		//alert(id);
+		$.post(link + "main/add_liked", { liked_id: id, ajax: '1' },
+  			function(data){
+				if(data === 'true'){
+					/*$.get(link + "main/show_cart", function(cart){
+						$(".busket_holder").html(cart);
+						popup("Товар добавлен в корзину"); 
+						
+					});*/
+					var like_nums = $('#liked_nums').html();
+					var new_num = Number(like_nums)+1;
+					$('#liked_nums').html(new_num);
+					popup('Добавлено в избранное');
+				}else{
+					popup(data);
+				}	
+			 }); 
+		return false;
+	});
+	
+	$(".remove_liked").click(function() {
+		var id = $(this).attr("id");
+		//var id = $(this).parent().parent().find('.page_name').attr('id');
+		$.post(link + "main/remove_liked", { liked_id: id, ajax: '1' },
+  			function(data){
+				if(data === 'true'){
+					/*$.get(link + "main/show_cart", function(cart){
+						$(".busket_holder").html(cart);
+						popup("Товар добавлен в корзину"); 
+						
+					});*/
+					var like_nums = $('#liked_nums').html();
+					var new_num = Number(like_nums)-1;
+					$('#liked_nums').html(new_num);
+					popup('Удалено из избранного');
+				}else{
+					popup(data);
+				}	
+			 }); 
+		return false;
+	});
+	
+	$(".remove").live('click',function() {
+		var id = $(this).closest('form.smaller').find('input[name=product_id]').val();
+		var rowid = $(this).closest('form.smaller').find('input[name=row_id]').val();
+		$.post(link + "main/remove_item", { product_id: id, row_id:rowid, ajax: '1' },
+		function(data){
+				if(data === 'true'){
+					$.get(link + "main/show_cart", function(cart){
+						$(".busket_holder").html(cart);
+						$('#myBusket').modal('toggle');
+						//$(".cart_small").sticky({ topSpacing: 20 });
+						//popup("Товар удален из корзины"); 
+					});
+				}
+			 }); 
+		return false;
+	});
+	
+	$(".send_order").live('click',function(){
+		var name = $('body').find('.order').find('#inputName4').val();
+		var phone = $('body').find('.order').find('#inputPhone3').val();
+		var email = $('body').find('.order').find('#inputEmail3').val();
+		var comments = $('body').find('.order').find('#comments').val();
+		var town = $("#towns option:selected" ).text();
+		
+		$.post(link + "main/order_message", { name:name,mail:email,phone:phone,town:town,comments:comments, ajax: '1' },
+		function(data){
+			if(data === 'true'){
+				//yaCounter35014805.reachGoal('sender');
+				popup("Ваш заказ отправлен! Менеджер свяжется с вами в ближайшее рабочее время!"); 
+				yaCounter43240019.reachGoal('sendorder');
+			}else{
+				popup("Произошла ошибка при отправке заказа!"); 
+			}
+		 }); 
+		$('#sendBasket').modal('hide');
+		return false;
+	});
+	function popup(message){
+		$("#titler").html(message);
+        $("#popup").modal('show');
+      }
+});

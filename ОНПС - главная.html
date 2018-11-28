@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<!-- saved from url=(0017)http://onps56.ru/ -->
+<html lang="en"><script type="text/javascript" async="" src="https://mc.yandex.ru/metrika/watch.js"></script><script type="text/javascript" charset="utf-8" id="zm-extension" src="chrome-extension://fdcgdnkidjaadafnichfpabhfomcebme/scripts/webrtc-patch.js" async=""></script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=0">
+<title>ОНПС - главная</title>
+<meta name="title" content="ОНПС - главная">
+<meta name="description" content="Орскнефтепродуктсервис - автозаправочные станции в г.Орске">
+<meta name="keywords" content="онпс,Орскнефтепродуктсервис,азс,орск,заправка,бензин,магазин,трасса">
+<!-- Bootstrap -->
+<link href="./ОНПС - главная_files/bootstrap.min.css" rel="stylesheet">
+<link href="./ОНПС - главная_files/main.css" rel="stylesheet">
+<link rel="stylesheet" href="./ОНПС - главная_files/stylesheet.css">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<link rel="stylesheet" href="./ОНПС - главная_files/control.css">
+<link rel="stylesheet" href="./ОНПС - главная_files/popup.css">
+<link rel="stylesheet" href="./ОНПС - главная_files/full-slider.css">
+<link rel="stylesheet" href="./ОНПС - главная_files/bootstrap-social.css">
+<link href="./ОНПС - главная_files/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="./ОНПС - главная_files/jquery-ui.css">
+<link href="./ОНПС - главная_files/css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="./ОНПС - главная_files/bootstrap.min(1).css">
+
+</head>
+<body>
+
+		<div class="modal fade" id="notice" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog  modal-md">
+				<div class="modal-content">
+					 <div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title" id="myModalLabel">Отправить заявку</h4>
+					  </div>
+					 <div class="modal-body text-center">
+					 <p>Заполните поля формы и наш менеджер свяжется с Вами в ближайшее рабочее время для индивидуального предложения</p>
+					 
+					 <hr>
+						<form method="post" action="http://onps56.ru/main/order_notice" id="notice_form">
+							<div class="form-group">
+							<input type="text" name="user_name" id="user_name" class="form-control" placeholder="введите ваше имя" required="required">
+							</div>
+							<div class="form-group">
+							<input type="number" name="user_phone" id="user_phone" class="form-control" placeholder="введите телефон для связи">
+							</div>
+							<input type="hidden" name="product_id_value" id="form_product_id_value" value="0">
+							<button type="submit" class="btn btn-success btn-block">отправить</button>
+							<!--<input type="submit" class="btn btn-success btn-block" value="отправить">-->
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<div class="modal fade" id="enter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog  modal-sm">
+				<div class="modal-content">
+					 <div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title" id="myModalLabel">Вход</h4>
+					  </div>
+					 <div class="modal-body text-center">
+					 
+						<form method="post" action="http://onps56.ru/main/auth" id="auth_form">
+							<input type="text" name="user_email" class=" icon custom-input" style=" background-image: url(/assets/img/username_field.png);" placeholder="введите email" required="required">
+							<input type="password" name="user_pass" class=" icon custom-input" style=" background-image: url(/assets/img/password_field.png);" placeholder="введите пароль" required="required">
+							
+							<a href="http://onps56.ru/#" style="display:block;text-align:right;text-decoration:underline;margin-bottom:10px;" data-dismiss="modal" data-toggle="modal" data-target="#myModal" id="pass_req">забыли пароль?</a>
+							
+							<input type="submit" class="full big button pink" value="войти">
+							
+							<button type="button" class="btn btn-default" style="margin-top:15px;width:100%;" data-toggle="modal" data-target="#reg">зарегистрироваться</button>
+							
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	<div class="modal fade" id="reg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				 <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title" id="myModalLabel">Регистрация</h4>
+				  </div>
+				 <div class="modal-body">
+				 	<div class="row">
+						<div class="col-xs-12">
+							<div class="form_holder2">
+							
+								
+						
+								<form method="post" action="http://onps56.ru/main/jquery_save" id="reg2">
+									<div class="form-group">
+										<input type="text" class="form-control" id="email_check3" name="user_email" placeholder="Ваша электронная почта" required="required">
+									</div>   
+									<div class="form-group">
+										<input type="password" class="form-control" id="reg_pass3" name="user_pass" placeholder="Придумайте пароль" required="required">
+									</div>    
+									<button type="submit" class="btn btn-success">зарегистрироваться</button>
+								</form>    
+							</div>
+						</div>
+					</div>
+				  </div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="profile">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Здравствуйте </h4>
+      </div>
+      <div class="modal-body">
+              <div class="form-group">
+                <a href="http://onps56.ru/main/profile">Профиль</a><br>
+				<a href="http://onps56.ru/main/orders">Мои заказы</a><br>
+				<a href="http://onps56.ru/#">Избранное</a>
+              </div>
+              
+              <div class="modal-footer">
+				<a href="http://onps56.ru/#" id="logout">Выход</a>
+			  </div>
+      </div>
+      
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal --><div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Восстановление пароля</h4>
+      </div>
+      <div class="modal-body">
+        	<form class="form-horizontal order" action="http://onps56.ru/main/pass_return" role="form" id="order">
+              <div class="form-group">
+                <label for="inputName3" class="col-sm-2 control-label">Ваш email</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputName3" name="user_email" placeholder="Ваш email" required="required">
+                </div>
+              </div>
+              
+              <div class="modal-footer">
+        		<!--<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>-->
+				<!--<span class="pull-left">Копия заказа будет отправлена на ваш email!</span>-->
+				<button type="submit" class="btn btn-primary send_order">Отправить заявку</button>
+			  </div>
+            </form>
+      </div>
+      
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal --><!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter46895304 = new Ya.Metrika({
+                    id:46895304,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true,
+                    trackHash:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/46895304" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->	<div class="container header">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6 col-md-5">
+				<a href="http://onps56.ru/" class="logo"><img src="./ОНПС - главная_files/logo.png" class="img img-responsive"></a>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-7">
+				<div class="phones">
+					<span class="phone">
+						<span class="glyphicon glyphicon-earphone"></span> 
+						<span class="phone"><span class="small_text_holder" id="text_holder/1">+38 (068) 175-93-82,</span></span> 
+						<span class="phone"><span class="small_text_holder" id="text_holder/2"><p>+38 (032) 290-31-09</p>
+</span></span>     
+					<span class="mail">@<span class="small_text_holder" id="text_holder/7"><a href="mailto:Fason.lviv@gmail.com">Fason.lviv@gmail.com</a></span></span>
+				</span></div><br>
+				<div class="price">
+					
+					<div class="price_holder">80: <span class="nums"><span class="small_text_holder" id="text_holder/4"><p>40.50</p>
+</span></span></div>
+					<div class="price_holder">92: <span class="nums"><span class="small_text_holder" id="text_holder/5"><p>40.50</p>
+</span></span></div>
+					<div class="price_holder">95: <span class="nums"><span class="small_text_holder" id="text_holder/6"><p>44.30</p>
+</span></span></div>
+					<div class="price_holder">ДТ зима: <span class="nums"><span class="small_text_holder" id="text_holder/3"><p>0.00</p>
+</span></span></div><br><br>
+					<div class="price_holder">92 eeFuel: <span class="nums"><span class="small_text_holder" id="text_holder/46"><p>41.00</p>
+</span></span></div>
+					<div class="price_holder">95 eeFuel: <span class="nums"><span class="small_text_holder" id="text_holder/47"><p>44.50</p>
+</span></span></div>
+					<div class="price_holder">ДТ лето: <span class="nums"><span class="small_text_holder" id="text_holder/48"><p>44.50</p>
+</span></span></div>
+					
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="text-right">
+				<ul class="nav nav-pills  top_menu"><li><a href="http://onps56.ru/main/page/1" class="extra-tab">// главная</a></li><li><a href="http://onps56.ru/main/page/2" class="extra-tab">// топливо</a></li><li><a href="http://onps56.ru/main/page/3" class="extra-tab actions_holder"><span class="tex">// акции</span></a></li><li><a href="http://onps56.ru/main/page/4" class="extra-tab">// карта заправок</a></li><li><a href="http://onps56.ru/main/page/8" class="extra-tab">// компания</a></li><li><a href="http://onps56.ru/#" class="extra-tab cabinet" data-toggle="modal" data-target="#enter">// личный кабинет</a></li></ul><div class="social hidden-xs">
+		<a href="https://vk.com/onps56" target="_new">
+			<img src="./ОНПС - главная_files/vk.png">
+		</a>
+		<a href="https://www.instagram.com/onps56/" class="btn btn-social-icon btn-instagram" target="_new">
+			<span class="fa fa-instagram"></span>
+		</a>
+		<a href="https://www.facebook.com/onps56" class="btn btn-social-icon btn-facebook" target="_new">
+			<span class="fa fa-facebook"></span>
+		</a>
+		</div>			</div>
+		</div>
+	</div>
+	<div class="container-fluid slider">
+		<div class="row">
+			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators"><li data-target="#carousel-example-generic" data-slide-to="0" class=""></li><li data-target="#carousel-example-generic" data-slide-to="1" class=""></li><li data-target="#carousel-example-generic" data-slide-to="1" class="active"></li></ol><div class="carousel-inner"><div class="item text-center">
+				        <img class="img img-responsive" src="./ОНПС - главная_files/163dc9a21302be84e10671bf537b1fe7.jpg">
+						<!--<a href="#" class="orange_btn"  data-toggle="modal" data-target="#enter">зарегистрироваться</a>-->
+					
+				  </div><div class="item text-center">
+				        <img class="img img-responsive" src="./ОНПС - главная_files/c6e64764d8de76facf35e13aa63c493c.jpg">
+						<!--<a href="#" class="orange_btn"  data-toggle="modal" data-target="#enter">зарегистрироваться</a>-->
+
+					
+				  </div><div class="item text-center active">
+				        <img class="img img-responsive" src="./ОНПС - главная_files/adea117fcf8745cd6c5b3eaf46429ccf.jpg">
+						<!--<a href="#" class="orange_btn"  data-toggle="modal" data-target="#enter">зарегистрироваться</a>-->
+
+					
+				  </div></div>
+                  <a class="left carousel-control" style="background:none;" href="http://onps56.ru/#carousel-example-generic" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                  </a>
+                  <a class="right carousel-control" style="background:none;" href="http://onps56.ru/#carousel-example-generic" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                  </a>
+                </div>		</div>
+	</div>
+	<div class="container-fluid text-center lead">
+		<div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 text-center">
+                <a href="http://onps56.ru/main/page/3" alt="акции">
+                    <img class="img img-responsive" src="./ОНПС - главная_files/a66cc9f0eb17947b349593217bdfde7a.jpg" style="padding-top: 20px;max-height: 250px;float:right">
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-8">
+                <h2><span class="small_text_holder" id="text_holder/8"><p>Бонусные карты «ОРСКНЕФТЕПРОДУКТСЕРВИС»</p>
+</span></h2>
+                <br>
+                <div class="col-sm-offset-2">
+                    <div class="col-xs-12 col-sm-5">
+                        <img src="./ОНПС - главная_files/card.png" class="img img-responsive pull-left">
+                    </div>
+                    <div class="col-xs-12 col-sm-7">
+                        <div class="pull-left text-left">
+                            <span class="small_text_holder" id="text_holder/49"><p>Заправляйтесь выгодно!<br>
+Становясь участником программы лояльности для&nbsp;физических лиц «Движение в будущее» Вы получаете бонусы с каждой покупки на АЗС «ОНПС».</p>
+</span>
+                            <br><br>
+                            <!--<a href="#" class="orange_btn" data-toggle="modal" data-target="#enter">зарегистрироваться</a>-->
+                            <a href="http://onps56.ru/images/anketa_onps.jpg" class="orange_btn" target="new">Скачать анкету</a>
+                        </div>	
+                    </div>
+                </div>
+            </div>
+		</div>
+	</div>
+	<div class="container-fluid news">
+		<div class="row">
+			<div class="container">
+				<div class="row">
+				<div class="col-xs-6 text-left"><h2>Новости</h2></div>
+				<div class="col-xs-6 text-right news_btn"><a href="http://onps56.ru/main/page/7">все новости</a></div>
+			</div>				<div class="row news_holder"><div class="col-xs-12 col-sm-6 col-md-4 news_val">
+								<a href="http://onps56.ru/main/page/54"><h4>Президент о росте цен на бензин</h4></a>
+								<a href="http://onps56.ru/main/page/54"><img src="./ОНПС - главная_files/c8cd5daf22e39f1d26af1e7f050651b8.jpg" class="img img-responsive"></a>
+								<span class="date"></span>
+							</div><div class="col-xs-12 col-sm-6 col-md-4 news_val">
+								<a href="http://onps56.ru/main/page/53"><h4>На льду любители</h4></a>
+								<a href="http://onps56.ru/main/page/53"><img src="./ОНПС - главная_files/73d5774c4ae83d7694b4ea1ee06e5ca9.JPG" class="img img-responsive"></a>
+								<span class="date"></span>
+							</div><div class="col-xs-12 col-sm-6 col-md-4 news_val">
+								<a href="http://onps56.ru/main/page/52"><h4>Нефтяники подписали соглашение</h4></a>
+								<a href="http://onps56.ru/main/page/52"><img src="./ОНПС - главная_files/17aacf0e90c2913d4ed74b331825fcb6.jpg" class="img img-responsive"></a>
+								<span class="date"></span>
+							</div><div class="clearfix"></div></div>			</div>
+		</div>
+	</div>
+	<div class="container partners text-center">
+		<div class="row">
+			<h2 class="part"><span class="small_text_holder" id="text_holder/10"><p>Партнеры «ОРСКНЕФТЕПРОДУКТСЕРВИС»</p>
+</span></h2>
+			<div class="col-xs-12 col-md-3 partner">
+				<a href="http://orsk-hockey.ru/" target="new" rel="nofollow">
+					<img src="./ОНПС - главная_files/partner_1.png" class="img img-responsive">
+				</a>	
+			</div>
+			<div class="col-xs-12 col-md-3 partner">
+				<a href="http://xn--56-6kchp4azahm.xn--p1ai/" target="new" rel="nofollow">
+					<img src="./ОНПС - главная_files/pribor2.png" class="img img-responsive">
+				</a>
+			</div>
+			<div class="col-xs-12 col-md-3 partner">
+				<a href="http://www.ring56.ru/" target="new" rel="nofollow">
+					<img src="./ОНПС - главная_files/partner_3.png" class="img img-responsive">
+				</a>
+			</div>
+			<div class="col-xs-12 col-md-3 partner">
+				<a href="http://orsk-adm.ru/" target="new" rel="nofollow">
+					<img src="./ОНПС - главная_files/partner_4.png" class="img img-responsive">
+				</a>
+			</div>
+			
+		</div>
+		<div class="row ">
+			<span class="text-center eshe"><span class="small_text_holder" id="text_holder/11"><p>и еще 350 партнеров</p>
+</span></span>
+			
+		</div>
+		<div class="row lead">
+			<h2>Топливные карты «ОРСКНЕФТЕПРОДУКТСЕРВИС»</h2>
+			<br>
+			<div class="col-sm-offset-2">
+				<div class="col-xs-12 col-sm-3">
+					<img src="./ОНПС - главная_files/cart.png" class="img img-responsive pull-left">
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<div class="pull-left text-left">
+						<div class="text_holder" id="text_holder/9"><ul>
+	<li>Выгодные тарифы</li>
+	<li>Система постоплаты по безналичному расчету</li>
+	<li>Современная система расчетов</li>
+	<li>Защита от несанкционированного доступа</li>
+</ul>
+</div>
+						<br><br>
+						<a href="http://onps56.ru/#" class="orange_btn" data-toggle="modal" data-target="#notice">стать партнером</a>
+					</div>	
+				</div>
+			</div>
+			
+			
+		</div>
+	</div>
+	<div class="container-fluid footer">
+		<div class="row">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6 col-md-5">
+						<a href="http://onps56.ru/" class="img_logo"><img src="./ОНПС - главная_files/logo_footer.png" class="img img-responsive"></a>
+						<div class="row">
+							<div class="col-md-6 phones">
+								<span class="small_text_holder" id="text_holder/12">+38 (068) 175-93-82<br>
++38 (032) 290-31-09<br></span>								<span class="small_text_holder" id="text_holder/13"><a href="mailto:Fason.lviv@gmail.com">Fason.lviv@gmail.com</a></span>								
+							</div>
+							<div class="col-md-6 socials">
+								Присоединяйтесь к нам<br>
+		<a href="https://vk.com/onps56" target="_new"><img src="./ОНПС - главная_files/vk.png"></a>
+		<a href="https://www.instagram.com/onps56/" class="btn btn-social-icon btn-instagram" target="_new">
+			<span class="fa fa-instagram"></span>
+		</a>
+		<a href="https://www.facebook.com/onps56" class="btn btn-social-icon btn-facebook" target="_new">
+			<span class="fa fa-facebook"></span>
+		</a>								
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 col-md-7">
+						<div class="footer_links">
+                	<ul class="nav nav-pills pull-right"><li><a href="http://onps56.ru/main/page/1">// главная</a></li><li><a href="http://onps56.ru/main/page/2">// топливо</a></li><li><a href="http://onps56.ru/main/page/3">// акции</a></li><li><a href="http://onps56.ru/main/page/4">// карта заправок</a></li></ul></div><div class="footer_links"><ul class="nav nav-pills pull-right"><li><a href="http://onps56.ru/main/page/8">// компания</a></li>
+                    </ul>
+                </div>					</div>
+				</div>
+				<div class="row">
+					<div class="copy">
+						<div class="col-sm-6 col-md-6 text-left">
+							<span class="small_text_holder" id="text_holder/14"><p>ОНПС © Все права защищены 2017</p>
+</span>							
+						</div>
+						<div class="col-sm-6 col-md-6 text-right">
+							<a href="http://web-style.ws/">Разработка сайта</a> WebStyle
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="./ОНПС - главная_files/jquery.min.js.завантаження"></script>
+<script src="./ОНПС - главная_files/jquery-migrate.min.js.завантаження"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="./ОНПС - главная_files/bootstrap.min.js.завантаження"></script>
+<script src="./ОНПС - главная_files/jquery-ui.js.завантаження"></script>
+<script src="./ОНПС - главная_files/ui.datepicker-ru.js.завантаження"></script>
+<!-- Modal -->
+	<div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+		<div class="modal-content" style="padding:15px;">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h4 class="modal-title" id="titler"></h4>
+		</div>
+	  </div>
+	</div><script src="./ОНПС - главная_files/iLoad.js.завантаження"></script><div class="L_7" style="display: none; opacity: 0;"><div class="L_8"><canvas id="L_0" width="18" height="18"></canvas><canvas id="L_2" width="18" height="18"></canvas><canvas id="L_1" width="18" height="18"></canvas><canvas id="L_3" width="18" height="18"></canvas><div style="background: rgb(255, 255, 255); left: 18px; z-index: 10001; height: 100%; width: 60%; position: absolute;"></div><div style="background: rgb(255, 255, 255); right: 18px; z-index: 10001; height: 100%; width: 60%; position: absolute;"></div><div style="top: -18px; z-index: 10001; height: 100%; overflow: hidden; position: relative;"><div style="background: rgb(255, 255, 255); top: 36px; z-index: 10001; height: 100%; overflow: hidden; position: relative;"><div style="padding: 0px; margin: 0px 18px;"></div><div class="L_6"><b style="background:#ffffff"></b></div><img src="./ОНПС - главная_files/wait.gif" style="visibility: hidden; position: absolute; top: 50%; left: 50%; margin: -28px 0px 0px -10px;"></div></div></div></div><div class="L_5" style="display: none; opacity: 0;"><br><style>.L_0 i {background:#ffffff}.L_1 i,.L_1 b,.L_2 b,.L_0 b,.L_4 p,.L_3 b{background-image:url(http://studioad.ru/iload/skin.png);_background-image:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=http://studioad.ru/iload/skin.png,sizingMethod=crop)}.L_0 b{background-image:none9;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=http://studioad.ru/iload/skin.png)}.L_1 i,.L_1 b,.L_2 b,.L_0 b,.L_4 p,.L_3 b{display:block;width:240px;height:66px}.L_5,.L_6,.L_7{left:0;top:0;width:100%;height:100%}.L_5{background:#000000;z-index:9999;position:fixed;_position:absolute;_height:expression(eval(L.cInfo(2)+L.cInfo(4))+'px');_width:expression(eval(L.cInfo(1)+L.cInfo(3))+'px')}.L_6{z-index:10003;position:absolute}.L_6 b{display:block;position:relative;height:100%}.L_7{z-index:10000;position:absolute;_height:expression(eval(L.cInfo(2))+'px');_width:expression(eval(L.cInfo(1))+'px')}.L_8{z-index:10001;width:152px;height:152px;position:relative}.L_2,.L_3{overflow:hidden;position:absolute;z-index:10000;width:35px;height:30px;top:50%;margin-top:-15px}.L_2 b{margin:-36px 0 0}.L_3 b{margin:-36px 0 0 -35px}#L_0,#L_1,#L_2,#L_3{overflow:hidden;position:absolute;z-index:10001}#L_0{left:0;top:0;}#L_1{left:0;bottom:0;}#L_2{right:0;top:0;}#L_3{right:0;bottom:0;}.L_9{top:-99999px;left:-99999px;position:absolute;visibility:hidden}.L_0{padding:2px 0 0}.L_0 a{font-size:0;display:-moz-inline-box;display:inline-block;overflow:hidden;margin-right:2px;height:13px;width:13px}.L_0 i{display:block;width:240px;height:66px;opacity:0.5;filter:alpha(opacity=50)}.L_0 a:hover i{opacity:0;filter:alpha(opacity=0)}.L_0 b{cursor:pointer}.L_1{position:absolute;z-index:9999;width:152px;height:36px;bottom:4px;left:50%}.L_1 i{width:152px;height:36px;overflow:hidden;position:relative;z-index:9999}.L_1 a{filter:alpha(opacity=100);opacity:1;top:6px;position:absolute;font-size:0;display:block;overflow:hidden;height:24px;width:24px;z-index:10001}.L_1 a:hover{filter:alpha(opacity=70);opacity:0.7}.L_a{filter:alpha(opacity=30)!important;opacity:0.3!important;cursor:default!important}.L_a b{cursor:default!important}.L_1 b{cursor:pointer;position:relative}.L_4{z-index:auto;overflow:hidden;position:absolute;width:36px;height:36px;top:0;right:0;margin-left:-76px}.L_4 p{margin:0 0 0 -204px}.L_4 a{z-index:9998;_z-index:auto;position:absolute;top:6px;left:6px}.L_4 .L_b b{margin:-42px 0 0 -216px}.L_4 .L_c b{margin:-42px 0 0 -192px}.L_1 .L_d b{margin:-42px 0 0 -168px}.L_1 .L_e b{margin:-42px 0 0 -144px}.L_1 .L_f b{margin:-42px 0 0 -120px}.L_1 .L_g b{margin:-42px 0 0 -72px}.L_1 .L_h b{margin:-42px 0 0 -96px}.L_1 .L_d{left:122px}.L_1 .L_e{left:93px}.L_1 .L_f{left:64px}.L_1 .L_g{left:6px}.L_1 .L_h{left:35px}.L_0 .L_c b{margin:-28px 0 0 -181px}.L_0 .L_b b{margin:-14px 0 0 -181px}.L_0 .L_d b{margin:0 0 0 -167px}.L_0 .L_e b{margin:0 0 0 -153px}.L_0 .L_f b{margin:-14px 0 0 -167px}.L_0 .L_g b{margin:-14px 0 0 -153px}.L_0 .L_h b{margin:0 0 0 -181px}</style></div><div class="L_9"><div class="L_2" style="margin-bottom: -18px;"><b></b></div><div class="L_3" style="margin-bottom: -18px;"><b></b></div></div>
+<script src="./ОНПС - главная_files/core.js.завантаження"></script>
+<script src="./ОНПС - главная_files/basket.js.завантаження"></script>
+<script src="./ОНПС - главная_files/ulogin.js.завантаження"></script><div id="ulogin_receiver_container" style="margin: 0px; padding: 0px; outline: none; border: none; border-radius: 0px; cursor: default; float: none; position: relative; display: none; width: 0px; height: 0px; left: 0px; top: 0px; box-sizing: content-box;"></div>
+
+
+</body></html>

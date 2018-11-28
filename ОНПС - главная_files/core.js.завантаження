@@ -1,0 +1,490 @@
+/* function preview(token){ 
+	 "use strict";
+	$.getJSON("//ulogin.ru/token.php?host=" + encodeURIComponent(location.toString()) + "&token=" + token + "&callback=?", function(data){
+		data = $.parseJSON(data.toString());
+		if(!data.error){
+			$.post(('/main/ulogin_jquery_save'),
+			{
+				email:data.email,
+				identity:data.identity,
+				first_name:data.first_name,
+				last_name:data.last_name,
+				birthday:data.bdate,
+				sex:data.sex,
+				phone:data.phone,
+				city:data.city
+			
+			},  function( data ) {
+			if(data.st === 0)
+				{
+					popup(data.msg);
+				}
+				if(data.st === 1)
+				{
+					popup(data.msg);
+				}				
+			}, 'json');
+			//alert("Привет, "+data.first_name+" "+data.last_name+"! Дата рождения: "+data.bdate);
+		}else{
+			alert('else');	
+		}
+	});
+}
+ function auth(token){
+	 $.getJSON("//ulogin.ru/token.php?host=" + encodeURIComponent(location.toString()) + "&token=" + token + "&callback=?", function(data){
+		data = $.parseJSON(data.toString());
+		if(!data.error){
+			$.post(('/main/jquery_auth'),
+			{
+				email:data.email,
+				identity:data.identity
+			
+			},  function( data ) {
+			if(data.st === 0)
+				{
+					popup(data.msg);
+				}
+				if(data.st === 1)
+				{
+					$("#enter").modal('hide');
+					$("#enter_modal").html('<a href="#" data-toggle="modal" data-target="#profile"><img src="/assets/img/enter.png"/>профиль</a>');
+					popup(data.msg);
+				}				
+			}, 'json');
+			//alert("Привет, "+data.first_name+" "+data.last_name+"! Дата рождения: "+data.bdate);
+		}else{
+			alert('else');	
+		}
+	});
+ }*/
+//auth
+//$s = file_get_contents('http://ulogin.ru/token.php?token=' . $_POST['token'] . '&host=' . $_SERVER['HTTP_HOST']);
+//$user = json_decode($s, true);
+
+
+ 
+$(document).ready(function() { 
+ 	
+ 	var link = "http://onps56.ru/";
+	$('[data-toggle="popover"]').popover();   
+	$('[data-toggle="tooltip"]').tooltip();
+	$('[data-toggle="dropdown"]').dropdown();
+	$("#logout").live('click',function()
+	{	
+		$.post(link + "main/logout",
+  			function(){
+  					location.reload();
+ 		 }); 
+		return false;
+	}); 
+	$('.carousel').carousel({
+	  interval: 4000
+	});
+	var heights = $(".panel-row").map(function() {
+		return $(this).height();
+	}).get(),
+	maxHeight = Math.max.apply(null, heights);
+	$(".panel-row").height(maxHeight);
+	
+	if($('.fancybox').length>0)
+	{
+		//product zoom
+		$(".fancybox").fancybox();
+	}
+	/*обновление данных*/
+	$('#settings_form').submit(function(){
+		$.ajax({
+			type: "POST",
+			url: link + "main/update_user_profile",
+			data: { 
+				user_name:$('#Name').val(),
+				user_phone:$('#Phone').val(),
+				user_surname:$('#Surname').val(),
+				user_town:$('#user_town').val()
+			},
+			success: function(data)
+			{
+				popup(data);
+			}
+		});
+		return false;
+	});
+	/*обновление данных*/
+	/*изменение пароля*/
+	$('#password_form').submit(function(){
+		
+		$.post($('#password_form').attr('action'), $('#password_form').serialize(), function( data ) {
+		if(data.st === 0)
+			{
+			 	popup(data.msg);
+			}
+					
+			if(data.st === 1)
+			{
+			  	popup(data.msg);
+			}
+					
+		}, 'json');
+		return false;			
+    });
+	/*изменение пароля*/
+	//initiate the plugin and pass the id of the div containing gallery images
+	if($(".product_zoom").length>0)
+	{
+		$(".product_zoom").elevateZoom({
+			gallery:'gallery_01',
+			zoomType:'inner',
+			cursor: 'crosshair', 
+			galleryActiveClass: 'active', 
+			imageCrossfade: true, 
+			loadingIcon: '/'
+		}); 
+		
+		/*$("#zoom_05").elevateZoom({
+		  zoomType				: "inner",
+		  cursor: "crosshair"
+		});*/
+		
+		//pass the images to Fancybox
+		$(".product_zoom").bind("click", function() {  
+		  var ez =   $('.product_zoom').data('elevateZoom');	
+			$.fancybox(ez.getGalleryList());
+		  return false;
+		});
+		//product zoom
+	}
+	
+	 
+	$.each( $(".rollover"), function(  ){
+		var h = $(this).parent().height();	
+		var w = $(this).parent().width();	
+		$(this).height(h);
+		$(this).width(w);
+	});
+	$( window ).resize(function() {
+		$.each( $(".rollover"), function(  ){
+			var h = $(this).parent().height();	
+			var w = $(this).parent().width();	
+			$(this).height(h);
+			$(this).width(w);
+		});
+	});
+	
+	$('.collapse').collapse();
+	$('body').scrollspy({ target: '#defaultNavbar1', offset: 100 });
+	/*$('body').each(function () { 
+	  var $spy = $(this).scrollspy('refresh')
+	});*/
+	//$("#defaultNavbar1").sticky({ topSpacing: 0 });
+	$("#defaultNavbar1 ul li a[href^='#']").on('click', function(e) {
+
+	   // prevent default anchor click behavior
+	   e.preventDefault();
+	
+	   // store hash
+	   var hash = this.hash;
+	
+	   // animate
+	   $('html, body').animate({
+		   scrollTop: $(hash).offset().top -50
+		 }, 300, function(){
+	
+		   // when done, add hash to url
+		   // (default click behaviour)
+		   window.location.hash = hash;
+		 });
+	
+	});
+	
+	$('body').scrollspy({ target: '.navbar-example', offset: 100 });
+	/*$('body').each(function () { 
+	  var $spy = $(this).scrollspy('refresh')
+	});*/
+	/*href tab shower*/
+	$( ".extra-tab" ).click(function(  ) {
+		document.location.href = $(this).attr('href');  //меняем хэш урла
+	});
+
+	var hash = window.location.hash;
+	$('a[href="' + hash + '"]').css('class','active');
+	$('a[href="' + hash + '"]').tab('show', function() {
+		$(document).scrollTop();
+	});
+	/*href tab shower*/
+	
+	/*$(".find_words").click(function()
+	{
+		var words = $('#typeahead').val();
+		console.log(words);
+		$.ajax({
+			type: "POST",
+			url: link + "main/search",
+			data: { words:words },
+			success: function(data)
+			{
+				if(data==='exist')
+				{
+					$('#result_email').html('Такой email уже зарегистрирован');
+					$('.login-success').attr('disabled', 'disabled');
+				}
+				else
+				{
+					$('#result_email').html(query_string+' не занят');
+					$('.login-success').removeAttr('disabled');
+				}				
+			}
+		});
+		return false;
+	});*/
+	
+	$("#back_phone").click(function()
+	{
+		 $( "#dialog-form-popup" ).css( 'visibility','visible' );
+		$( ".hider" ).css( 'visibility','visible' );
+		$( ".titler" ).html( 'Заказать обратный звонок' );
+		$( "#order_name" ).html( 'Заказать обратный звонок' );
+		return false;
+	});
+	
+	$("#back_phone2").click(function()
+	{
+		 $( "#dialog-form-popup" ).css( 'visibility','visible' );
+		$( ".hider" ).css( 'visibility','visible' );
+		$( ".titler" ).html( 'Заказать обратный звонок' );
+		$( "#order_name" ).html( 'Заказать обратный звонок' );
+		return false;
+	});
+	
+	$("#auth").click(function() {
+		$(".hidden_auth").toggle();	
+		return false;
+	});
+	
+	$('.button-search').click(function(e){
+		e.preventDefault();
+
+		$(this).parents('form').submit();
+	});
+	
+	////добавить организацию
+//	var scntDiv = $('#company_add');
+//	var i = $('#company_add').size() + 1;
+//	
+//	$('#addScnt').live('click', function() {
+//			$('<span class="company_line"></span><div class="else"><span class="title">Организация</span><input type="text" name="organization[]" placeholder=""/></div><div class="else"><span class="title">Должность</span><input type="text" name="post[]" placeholder=""/></div><div class="else"><span class="title">Период работы</span><input type="text" name="period[]" placeholder=""/></div><div class="else"><span class="title">ФИО руководителя</span><input type="text" name="leader_name[]" placeholder=""/></div><div class="else"><span class="title">Контактный телефон</span><input type="text" name="work_phone[]" placeholder=""/></div>').appendTo(scntDiv);
+//			i++;
+//			return false;
+//	});
+//	//добавить организацию
+	
+   $("form#order").submit(function(){
+		/*var name = $('body').find('.order').find('#inputName3').val();
+		//var phone = $('body').find('.order').find('#inputPhone3').val();
+		//var place = $('body').find('.order').find('#inputPlace3').val(); 
+		$.post(link + "main/pass_return", { name:name,phone:phone, ajax: '1' },
+		function(data){
+			//alert(data);
+				if(data === 'true'){
+					//yaCounter36539885.reachGoal('call');
+					$('#myModal').modal('hide');
+					alert("Ваш заявка отправлена! Менеджер свяжется с вами во время ближайшей поставки!"); 
+				}else{
+					alert("Произошла ошибка при отправке заказа!"); 
+				}
+			 }); 
+		return false;*/
+	   
+	   $.post($('#order').attr('action'), $('#order').serialize(), function( data ) {
+			if(data.st === 0)
+			{
+				popup(data.msg);
+			}
+			if(data.st === 1)
+			{
+				popup(data.msg);
+			}				
+		}, 'json');
+		return false;	
+	});
+	
+	 $("form#otz").submit(function(){
+		var name = $('body').find('.order').find('#inputName4').val();
+		var otz = $('body').find('.order').find('textarea[name=inputOtz]').val();
+		//var place = $('body').find('.order').find('#inputPlace3').val();
+		$.post(link + "main/order_otz", { name:name,otz:otz, ajax: '1' },
+		function(data){
+			//alert(data);
+				if(data === 'true'){
+					
+					$('#myOtz').modal('hide');
+					alert("Ваш отзыв отправлен модератору!!"); 
+				}else{
+					alert("Произошла ошибка при отправке отзыва!"); 
+				}
+			 }); 
+		return false;
+	});
+	
+	$("form#busket").submit(function(){
+		var name = $('body').find('.order').find('#inputName4').val();
+		var phone = $('body').find('.order').find('#inputPhone4').val();
+		var place = $('body').find('.order').find('#inputPlace4').val();
+		var busket = $('body').find('.order').find('#inputBusket4').val();
+		$.post(link + "main/order_busket", { name:name,place:place,phone:phone, busket:busket, ajax: '1' },
+		function(data){
+			//alert(data);
+				if(data === 'true'){
+					//yaCounter35014805.reachGoal('sender');
+					$('#myModal2').modal('hide');
+					alert("Ваш заявка отправлена! Менеджер свяжется с вами во время ближайшей поставки!"); 
+				}else{
+					alert("Произошла ошибка при отправке заказа!"); 
+				}
+			 }); 
+		return false;
+	});
+	
+	  $( ".call_btn" )
+      .click(function() {
+        $( "#dialog-form-popup" ).css( 'visibility','visible' );
+		$( ".hider" ).css( 'visibility','visible' );
+		$( ".titler" ).html( 'Заказать звонок' );
+		var project = $(this).parent('div').find('.title_holder').text();
+		$("#zakaz" ).val(project);
+		$( "#order_name" ).html( 'Отправить заявку' );
+		return false;
+      }); 
+	$( ".popup_close" )
+		.click(function() {
+		$( "#dialog-form-popup" ).css( 'visibility','hidden' );
+		$( "#dialog-form-popup2" ).css( 'visibility','hidden' );
+		$( "#dialog-form-popup3" ).css( 'visibility','hidden' );
+		$( ".hider" ).css( 'visibility','hidden' );
+		return false;
+	});
+	$( ".hider" )
+		.click(function() {
+		$( "#dialog-form-popup" ).css( 'visibility','hidden' );
+		$( "#dialog-form-popup2" ).css( 'visibility','hidden' );
+		$( "#dialog-form-popup3" ).css( 'visibility','hidden' );
+		$( ".hider" ).css( 'visibility','hidden' );
+		return false;
+	});  
+	
+	//бронирование слева
+	$("form#left_bron").submit(function() {
+		var name = $(this).find('input[name=name]').val();
+		var phone = $(this).find('input[name=phone]').val();
+		var target = $(this).find("#left_rooms option:selected" ).val();
+		var date_start = $("#from2").val();
+		var date_end = $("#to2").val();
+		$.ajax({
+			type: "POST",
+			url: link + "main/order",
+			data: { 
+				name: name, phone:phone, target:target, date_start:date_start,date_end:date_end, ajax: '1'
+			},
+			success: function(data)
+			{
+				//yaCounter40618540.reachGoal('done');
+				popup(data);
+			}
+		}); 
+		return false;
+	});
+	//бронирование footer
+	$("form#footer_bron").submit(function() {
+		var name = $(this).find('input[name=name]').val();
+		var phone = $(this).find('input[name=phone]').val();
+		var target = $(this).find("#footer_rooms option:selected" ).val();
+		var date_start = $("#from").val();
+		var date_end = $("#to").val();
+		$.ajax({
+			type: "POST",
+			url: link + "main/order",
+			data: { 
+				name: name, phone:phone, target:target, date_start:date_start,date_end:date_end, ajax: '1'
+			},
+			success: function(data)
+			{
+				//yaCounter40618540.reachGoal('done');
+				popup(data);
+			}
+		}); 
+		/*$.post(link + "main/order", { name: name, phone:phone, target:target, date_start:date_start,date_end:date_end, ajax: '1' },
+  			function(data){
+  			if(data == 'true'){
+				popup( 'Спасибо! Ваша заявка отправлена!<br/>В ближайшее время с вами свяжется менеджер нашего отеля!' );
+				//yaCounter40618540.reachGoal('done');
+    		}else{
+				//alert('false');
+				popup( data );
+    		}	
+ 		 }); */
+		return false;
+	});
+	
+	
+	
+	//поделиться опытом
+	$("form#experience_form").submit(function() {
+		var name = $(this).find('input[name=name]').val();
+		var experience = $(this).find('textarea[name=experience]').val();
+		 $.post(link + "main/add_experience", { name: name, experience: experience, ajax: '1' },
+  			function(data){
+  			if(data === 'true'){
+				//alert('true');
+				$( ".hider" ).fadeIn("slow").delay(3000).fadeOut('slow');
+				$( "#dialog-form-popup2" ).fadeIn("slow").delay(3000).fadeOut('slow');
+				$( ".titler" ).html( 'Ваш отзыв отправлен в обработку<br/>и в скором времени появится на нашем сайте.' );
+    		}else{
+				//alert('false');
+				$( "#dialog-form-popup2" ).fadeIn("slow").delay(3000).fadeOut('slow');
+				$( ".titler" ).html( 'ВОЗНИКЛА ОШИБКА ПРИ ОТПРАВКЕ' );
+    		}	
+ 		 }); 
+		return false;
+	});
+	
+	
+	
+	/*register*/
+	$('#reg2').submit(function(){
+		$.post($('#reg2').attr('action'), $('#reg2').serialize(), function( data ) {
+			if(data.st === 0)
+			{
+				popup(data.msg);
+			}
+			if(data.st === 1)
+			{
+				popup(data.msg);
+			}				
+		}, 'json');
+		return false;			
+	   });
+	/*register*/
+	//заявка звонка
+	$("#dialog-form-popup form").submit(function() {
+		var name = $(this).find('input[name=name]').val();
+		var phone = $(this).find('input[name=phone]').val();
+		var who = $(this).find('input[name=zakaz]').val();
+		$( "#dialog-form-popup" ).css( 'visibility','hidden' );
+		
+		 $.post(link + "main/phone_order", { name: name, phone: phone, zakaz: who, ajax: '1' },
+  			function(data){
+  			if(data === 'true'){
+				$( "#dialog-form-popup2" ).css( 'visibility','visible' );
+				$( ".titler" ).html( 'Ваша заявка успешно отправлена' );
+				//yaCounter31910686.reachGoal('call'); return true;
+    		}else{
+				$( "#dialog-form-popup2" ).css( 'visibility','visible' );
+				$( ".titler" ).html( 'ВОЗНИКЛА ОШИБКА ПРИ ОТПРАВКЕ ПИСЬМА' );
+    		}	
+ 		 }); 
+		return false;
+	}); 
+	function popup(message){
+	$("#titler").html(message);
+	$("#popup").modal('show');
+  }
+});
